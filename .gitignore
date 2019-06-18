@@ -1,0 +1,4 @@
+.stack-work/
+polytest.cabal
+stack.yaml.lock
+*~
