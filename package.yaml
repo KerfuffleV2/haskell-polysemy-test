@@ -1,6 +1,6 @@
 name:                polytest
 version:             0.1.0.0
-github:              "kerfufflev2/polytest"
+github:              "kerfufflev2/haskell-polysemy-test"
 license:             MIT
 author:              "Kerfuffle"
 copyright:           "2019 Kerfuffle"
@@ -8,7 +8,7 @@ copyright:           "2019 Kerfuffle"
 extra-source-files:
 - README.md
 
-description:         Please see the README on GitHub at <https://github.com/githubuser/polytest#readme>
+description:         Please see the README on GitHub at <https://github.com/kerfufflev2/haskell-polysemy-test#readme>
 
 dependencies:
 - base >= 4.7 && < 5
