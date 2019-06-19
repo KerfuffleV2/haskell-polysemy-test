@@ -15,10 +15,11 @@ Note: I have no affiliation with the author.
 ## Quickstart
 
 You will need [Stack](https://docs.haskellstack.org/en/stable/README/)
+or [cabal-install](https://www.haskell.org/cabal/).
 
 1. Clone the repo.
 2. Enter repo directory.
-3. Execute `stack run`
+3. Execute `stack run` or `cabal new-run`.
 
 ## Sample Output
 ```
