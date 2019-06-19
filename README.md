@@ -4,6 +4,14 @@ A simple example of using the Polysemy Haskell package to implement the Guess-A-
 
 This example uses `Input`, `Output`, `Reader`, `State` and `Error`.
 
+***
+
+The author of Polysemy very kindly took the time to review my code.
+
+* [Link to their pull request with the review and discussion](https://github.com/KerfuffleV2/haskell-polysemy-test/pull/1)
+
+* [Link to the forked repo with their changes](https://github.com/isovector/haskell-polysemy-test)
+
 
 ## About Polysemy
 Note: I have no affiliation with the author.
