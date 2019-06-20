@@ -1,0 +1,32 @@
+name:           polytest
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/kerfufflev2/haskell-polysemy-test#readme>
+homepage:       https://github.com/kerfufflev2/haskell-polysemy-test#readme
+bug-reports:    https://github.com/kerfufflev2/haskell-polysemy-test/issues
+author:         Kerfuffle
+copyright:      2019 Kerfuffle
+license:        MIT
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.24
+
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/kerfufflev2/haskell-polysemy-test
+
+executable polytest-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_polytest
+  hs-source-dirs:
+      app
+  default-extensions: DataKinds FlexibleContexts GADTs LambdaCase PolyKinds RankNTypes ScopedTypeVariables TypeApplications TypeOperators TypeFamilies
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -O2 -flate-specialise -fspecialise-aggressively
+  build-depends:
+      base >=4.7 && <5
+    , polysemy >=0.3
+    , random
+  default-language: Haskell2010
