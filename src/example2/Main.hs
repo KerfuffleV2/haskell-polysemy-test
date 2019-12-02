@@ -33,7 +33,7 @@ runGuessIO = interpret \case
 
 
 runGuessPure :: Members '[Input MaybeRandomInt] r => [String] -> Sem (Guess ': r) a -> Sem r ([String], Either String a)
-runGuessPure inp = runFoldMapOutput pure . runListInput inp . runError . reinterpret3 \case
+runGuessPure inp = runOutputMonoid pure . runInputList inp . runError . reinterpret3 \case
   ReadLn -> input @(Maybe String) >>= maybe (throw "Failed to read") return
   WriteLn s -> output $ '>':' ':s
   GetNextRand -> fromJust <$> input @MaybeRandomInt
@@ -92,7 +92,7 @@ main = do
     inputlist = ["50", "75", "", "", "", "y","75"]
     presult :: ([String], Either String [Bool])
     presult = run
-      . runListInput (randomRs guessbounds rgen)
+      . runInputList (randomRs guessbounds rgen)
       . runGuessPure inputlist
       $ guessProg conf
 
@@ -106,9 +106,9 @@ main = do
       putStrLn $ "Successful completion with result: " <> show progreturn
   putStrLn "\n====== Running IO program"
   iresult <- runM
-    . runTraceIO
-    . runMonadicInput (sendM getLine)
-    . runMonadicInput (sendM $ randomRIO guessbounds)
+    . traceToIO 
+    . runInputSem(embed getLine)
+    . runInputSem (embed $ randomRIO guessbounds)
     . runGuessIO
     $ guessProg conf
   putStrLn "====== Result from IO program"

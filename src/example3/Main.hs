@@ -91,8 +91,8 @@ main = do
     inputlist = ["50", "75", "", "", "", "y","75"]
     (progoutput :: [String], progreturn)
             = run
-            . runFoldMapOutput (:[])
-            . runTraceAsOutput
+            . runOutputMonoid (:[])
+            . traceToOutput 
             . tracePrefix
             . runListInputForever randlist
             . runListInputForever inputlist
@@ -104,10 +104,10 @@ main = do
   putStrLn "\n"
   putStrLn "====== Running IO program"
   iresult <- runM
-           . runTraceIO
+           . traceToIO
            . tracePrefix
-           . runMonadicInput (sendM $ randomRIO bounds)
-           . runMonadicInput (sendM getLine)
+           . runInputSem (embed $ randomRIO bounds)
+           . runInputSem (embed getLine)
            $ guessProg conf
   putStrLn "====== Result from IO program"
   putStrLn $ "Completion with result: " <> show iresult
