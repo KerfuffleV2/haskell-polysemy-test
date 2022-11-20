@@ -1,4 +1,12 @@
-# polytest
+# ⚠️ Warning ⚠️
+
+Please note that this repo has not been updated since **2019**. The information/examples are very outdated and likely don't apply to the current version of Polysemy or would require significant changes to be workable. 
+
+Please contact me if you're interested in taking over this repo and maintaining/bringing it up to date.
+
+***
+
+## polytest
 
 Several simple examples of using the Polysemy Haskell package to implement the Guess-A-Number game.
 
