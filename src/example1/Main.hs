@@ -28,10 +28,10 @@ data Guess m a where
 makeSem ''Guess
 
 
-runGuessIO :: Members '[Reader GuessConfig, State RandState, Lift IO] r => Sem (Guess ': r) a -> Sem r a
+runGuessIO :: Members '[Reader GuessConfig, State RandState, Embed IO] r => Sem (Guess ': r) a -> Sem r a
 runGuessIO = interpret \case
-  ReadLn -> sendM getLine
-  WriteLn s -> sendM . putStrLn $ '>':' ':s
+  ReadLn -> embed getLine
+  WriteLn s -> embed . putStrLn $ '>':' ':s
   GetConfig -> ask
   GetNextRand -> do
     (h,rest) <- gets $ \(RandState (h:rest)) -> (h,rest)
@@ -40,7 +40,7 @@ runGuessIO = interpret \case
 
 
 runGuessPure :: Members '[Reader GuessConfig, State RandState] r => [String] -> Sem (Guess ': r) a -> Sem r ([String], Either String a)
-runGuessPure inp = runFoldMapOutput pure . runListInput inp . runError . reinterpret3 \case
+runGuessPure inp = runOutputMonoid pure . runInputList inp . runError . reinterpret3 \case
   ReadLn -> input >>= maybe (throw "Failed to read") return
   WriteLn s -> output $ '>':' ':s
   GetConfig -> ask
